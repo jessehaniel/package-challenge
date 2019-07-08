@@ -1,4 +1,4 @@
-package com.mobiquityinc.packer;
+package com.mobiquityinc.packer.exception;
 
 public class APIException extends Exception {
     

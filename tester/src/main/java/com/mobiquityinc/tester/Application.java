@@ -1,7 +1,7 @@
 package com.mobiquityinc.tester;
 
-import com.mobiquityinc.packer.APIException;
 import com.mobiquityinc.packer.Packer;
+import com.mobiquityinc.packer.exception.APIException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Optional;
