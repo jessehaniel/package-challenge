@@ -21,7 +21,7 @@ public class ConstraintsValidation {
         }
     }
     
-    public static void validateInputFormat(String line) throws InvalidFileFormatException {
+    public static void validateInputFormat(String line) {
         if (negate(lineMatch(line))) {
             String message = String.format("Line {%s} doesn't match the expected input format.", line);
             throw new InvalidFileFormatException(message);
