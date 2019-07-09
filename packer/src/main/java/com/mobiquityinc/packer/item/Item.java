@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 public class Item {
     
+    private static final String ITEM_PATTERN = "(\\(\\d+,\\d+(\\.\\d+)?,€\\d+(\\.\\d+)?\\))";
+    private static final int MAX_SIZE = 15;
+    
     private int index;
     private double weight;
     private double value;
@@ -32,16 +35,17 @@ public class Item {
         return listOfStringItem.parallelStream()
             .map(s -> s.replaceAll("\\(", "").replaceAll("\\)", ""))
             .map(Item::new)
+            .limit(MAX_SIZE)
             .collect(Collectors.toList());
     }
     
     private static String[] splitStringIntoListStringItem(String orderedItems) {
-        return orderedItems.split("(\\(\\d+,\\d+(\\.\\d+)?,€\\d+(\\.\\d+)?\\))");
+        return orderedItems.split(ITEM_PATTERN);
     }
     
     private void convertValidatingStringToItem(String stringItem) {
         String[] split = stringItem.split(",");
-        this.index = Integer.valueOf(split[0]);//XXX is this necessary?
+        this.index = Integer.valueOf(split[0]);
         this.weight = Double.valueOf(split[1]);
         this.value = Double.valueOf(split[2].replace("€", ""));
         

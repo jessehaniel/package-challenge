@@ -4,24 +4,21 @@ import com.mobiquityinc.packer.item.Item;
 import com.mobiquityinc.packer.validation.ConstraintsValidation;
 import java.util.List;
 
-public class Order {
-    
-    private static final double UPPER_WEIGHT_LIMIT = 100;
-    private static final double LOWER_WEIGHT_LIMIT = 0;
+public class IntendedPack {
     
     private double packageWeightLimit;
     private List<Item> orderedItems;
     
-    public Order() {
+    public IntendedPack() {
         super();
     }
     
-    public Order(double packageWeightLimit, List<Item> orderedItems) {
+    public IntendedPack(double packageWeightLimit, List<Item> orderedItems) {
         this.packageWeightLimit = packageWeightLimit;
         this.orderedItems = orderedItems;
     }
     
-    public Order(String orderStringLine) {
+    public IntendedPack(String orderStringLine) {
         this();
         convertValidatingStringToOrder(orderStringLine);
     }

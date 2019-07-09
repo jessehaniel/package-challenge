@@ -1,8 +1,7 @@
 package com.mobiquityinc.packer;
 
 import com.mobiquityinc.packer.exception.APIException;
-import com.mobiquityinc.packer.exception.OrderScreeningException;
-import com.mobiquityinc.packer.order.Order;
+import com.mobiquityinc.packer.order.IntendedPack;
 import com.mobiquityinc.packer.order.OrderScreening;
 import java.util.Collections;
 import java.util.List;
@@ -20,18 +19,18 @@ public class Packer {
     
     public static String pack(String filePath) throws APIException {
         try {
-            List<Order> orders = new OrderScreening().convertValidating(filePath);
-            return orders.parallelStream()
+            List<IntendedPack> intendedPacks = new OrderScreening().convertValidating(filePath);
+            return intendedPacks.parallelStream()
                 .map(Packer::solveKnapsack)
                 .map(Solution::toString)
                 .collect(Collectors.joining("\n"));
-        } catch (OrderScreeningException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage(), e);
             throw new APIException(e);
         }
     }
     
-    private static Solution solveKnapsack(Order order) {
+    private static Solution solveKnapsack(IntendedPack intendedPack) {
         return new Solution(Collections.emptyList());
     }
 }

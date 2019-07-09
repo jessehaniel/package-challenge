@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface IOrderScreening {
     
-    List<Order> convertValidating(String filePath) throws OrderScreeningException;
+    List<IntendedPack> convertValidating(String filePath) throws OrderScreeningException;
     
     List<String> readAllLines(String filePath) throws IOException;
     
-    List<Order> convertStringLineToOrderedPack(List<String> orderStringLineList);
+    List<IntendedPack> convertValidatingStringLineToIntendedPack(List<String> orderStringLineList);
     
-    Order convertStringLineToOrderedPack(String orderStringLine);
+    IntendedPack convertValidatingStringLineToIntendedPack(String orderStringLine);
     
 }

@@ -2,12 +2,12 @@ package com.mobiquityinc.packer.validation;
 
 import com.mobiquityinc.packer.exception.InvalidFieldException;
 import com.mobiquityinc.packer.exception.InvalidFileFormatException;
-import com.mobiquityinc.packer.order.Order;
 
 public class ConstraintsValidation {
     
     private static final double UPPER_WEIGHT_LIMIT = 100;
     private static final double LOWER_WEIGHT_LIMIT = 0;
+    private static final String LINE_PATTERN = "^\\d+(\\.\\d+)?:(\\(\\d+,\\d+(\\.\\d+)?,€\\d+(\\.\\d+)?\\))+$";
     
     private ConstraintsValidation() {
         super();
@@ -33,11 +33,6 @@ public class ConstraintsValidation {
     }
     
     private static boolean lineMatch(String line) {
-        String regex = "^\\d+(\\.\\d+)?:(\\(\\d+,\\d+(\\.\\d+)?,€\\d+(\\.\\d+)?\\))+$";
-        return line.replaceAll("\\s+", "").matches(regex);
-    }
-    
-    public static void validateOrderConstraints(Order order) {
-        //TODO
+        return line.replaceAll("\\s+", "").matches(LINE_PATTERN);
     }
 }

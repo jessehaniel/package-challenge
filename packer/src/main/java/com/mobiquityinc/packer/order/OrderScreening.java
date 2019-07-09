@@ -11,13 +11,11 @@ import java.util.stream.Collectors;
 public class OrderScreening implements IOrderScreening {
     
     @Override
-    public List<Order> convertValidating(String filePath) throws OrderScreeningException {
+    public List<IntendedPack> convertValidating(String filePath) throws OrderScreeningException {
         try {
             List<String> allLines = readAllLines(filePath);
             allLines.parallelStream().forEach(ConstraintsValidation::validateInputFormat);
-            List<Order> orderList = convertStringLineToOrderedPack(allLines);
-            orderList.parallelStream().forEach(ConstraintsValidation::validateOrderConstraints);
-            return orderList;
+            return convertValidatingStringLineToIntendedPack(allLines);
         } catch (Exception e) {
             throw new OrderScreeningException(e.getMessage(), e);
         }
@@ -29,14 +27,14 @@ public class OrderScreening implements IOrderScreening {
     }
     
     @Override
-    public List<Order> convertStringLineToOrderedPack(List<String> orderStringLineList) {
+    public List<IntendedPack> convertValidatingStringLineToIntendedPack(List<String> orderStringLineList) {
         return orderStringLineList.parallelStream()
-            .map(this::convertStringLineToOrderedPack)
+            .map(this::convertValidatingStringLineToIntendedPack)
             .collect(Collectors.toList());
     }
     
     @Override
-    public Order convertStringLineToOrderedPack(String orderStringLine) {
-        return new Order(orderStringLine);
+    public IntendedPack convertValidatingStringLineToIntendedPack(String orderStringLine) {
+        return new IntendedPack(orderStringLine);
     }
 }
