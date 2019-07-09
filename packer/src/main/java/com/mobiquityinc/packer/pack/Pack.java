@@ -1,24 +1,24 @@
-package com.mobiquityinc.packer.order;
+package com.mobiquityinc.packer.pack;
 
 import com.mobiquityinc.packer.item.Item;
 import com.mobiquityinc.packer.validation.ConstraintsValidation;
 import java.util.List;
 
-public class IntendedPack {
+public class Pack {
     
     private double packageWeightLimit;
-    private List<Item> orderedItems;
+    private List<Item> itemsList;
     
-    public IntendedPack() {
+    public Pack() {
         super();
     }
     
-    public IntendedPack(double packageWeightLimit, List<Item> orderedItems) {
+    public Pack(double packageWeightLimit, List<Item> itemsList) {
         this.packageWeightLimit = packageWeightLimit;
-        this.orderedItems = orderedItems;
+        this.itemsList = itemsList;
     }
     
-    public IntendedPack(String orderStringLine) {
+    public Pack(String orderStringLine) {
         this();
         convertValidatingStringToOrder(orderStringLine);
     }
@@ -26,7 +26,7 @@ public class IntendedPack {
     private void convertValidatingStringToOrder(String orderStringLine) {
         String[] split = orderStringLine.split(":");
         this.packageWeightLimit = Double.parseDouble(split[0]);
-        this.orderedItems = Item.convertItemsStringToItemsList(split[1]);
+        this.itemsList = Item.convertItemsStringToItemsList(split[1]);
         ConstraintsValidation
             .validateFieldLimitBetweenZeroAndOneHundred(this.packageWeightLimit, "Package weight limit");
     }
@@ -39,11 +39,19 @@ public class IntendedPack {
         this.packageWeightLimit = packageWeightLimit;
     }
     
-    public List<Item> getOrderedItems() {
-        return orderedItems;
+    public List<Item> getItemsList() {
+        return itemsList;
     }
     
-    public void setOrderedItems(List<Item> orderedItems) {
-        this.orderedItems = orderedItems;
+    public void setItemsList(List<Item> itemsList) {
+        this.itemsList = itemsList;
+    }
+    
+    @Override
+    public String toString() {
+        return "Pack{" +
+            "packageWeightLimit=" + packageWeightLimit +
+            ", itemsList=" + itemsList +
+            '}';
     }
 }

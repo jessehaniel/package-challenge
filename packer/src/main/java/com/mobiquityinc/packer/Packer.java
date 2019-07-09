@@ -1,8 +1,9 @@
 package com.mobiquityinc.packer;
 
 import com.mobiquityinc.packer.exception.APIException;
-import com.mobiquityinc.packer.order.IntendedPack;
-import com.mobiquityinc.packer.order.OrderScreening;
+import com.mobiquityinc.packer.pack.IPackScreening;
+import com.mobiquityinc.packer.pack.Pack;
+import com.mobiquityinc.packer.pack.PackScreening;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,8 +20,9 @@ public class Packer {
     
     public static String pack(String filePath) throws APIException {
         try {
-            List<IntendedPack> intendedPacks = new OrderScreening().convertValidating(filePath);
-            return intendedPacks.parallelStream()
+            IPackScreening packScreening = new PackScreening();
+            List<Pack> packs = packScreening.convertValidating(filePath);
+            return packs.parallelStream()
                 .map(Packer::solveKnapsack)
                 .map(Solution::toString)
                 .collect(Collectors.joining("\n"));
@@ -30,7 +32,7 @@ public class Packer {
         }
     }
     
-    private static Solution solveKnapsack(IntendedPack intendedPack) {
+    private static Solution solveKnapsack(Pack pack) {
         return new Solution(Collections.emptyList());
     }
 }

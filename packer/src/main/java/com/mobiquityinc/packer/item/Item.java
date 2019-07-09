@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class Item {
     
-    private static final String ITEM_PATTERN = "(\\(\\d+,\\d+(\\.\\d+)?,€\\d+(\\.\\d+)?\\))";
     private static final int MAX_SIZE = 15;
     
     private int index;
@@ -33,14 +32,14 @@ public class Item {
     public static List<Item> convertItemsStringToItemsList(String orderedItems) {
         List<String> listOfStringItem = Arrays.asList(splitStringIntoListStringItem(orderedItems));
         return listOfStringItem.parallelStream()
-            .map(s -> s.replaceAll("\\(", "").replaceAll("\\)", ""))
             .map(Item::new)
             .limit(MAX_SIZE)
             .collect(Collectors.toList());
     }
     
-    private static String[] splitStringIntoListStringItem(String orderedItems) {
-        return orderedItems.split(ITEM_PATTERN);
+    static String[] splitStringIntoListStringItem(String orderedItems) {
+        //expected pattern -> (\(\d+,\d+(\.\d+)?,€\d+(\.\d+)?\))
+        return orderedItems.substring(1, orderedItems.length() - 1).split("\\)\\(");
     }
     
     private void convertValidatingStringToItem(String stringItem) {
@@ -86,11 +85,22 @@ public class Item {
             return false;
         }
         Item item = (Item) o;
-        return value == item.value;
+        return index == item.index &&
+            Double.compare(item.weight, weight) == 0 &&
+            Double.compare(item.value, value) == 0;
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(index, weight, value);
+    }
+    
+    @Override
+    public String toString() {
+        return "Item{" +
+            "index=" + index +
+            ", weight=" + weight +
+            ", value=" + value +
+            '}';
     }
 }
