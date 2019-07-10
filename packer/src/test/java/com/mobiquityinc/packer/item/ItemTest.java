@@ -50,4 +50,13 @@ class ItemTest {
         assertEquals(expectedItemArray.length, splitItemsArray.length);
         assertThat(splitItemsArray, is(expectedItemArray));
     }
+    
+    @Test
+    void toStringTest() {
+        //without trailing zeros
+        String stringItem = "1,53.3,€45";
+        String formattedStringItem = String.format("(%s)", stringItem);
+        Item item = new Item(stringItem);
+        assertEquals(formattedStringItem, item.toString());
+    }
 }

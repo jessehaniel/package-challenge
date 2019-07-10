@@ -2,9 +2,13 @@ package com.mobiquityinc.packer.pack;
 
 import com.mobiquityinc.packer.item.Item;
 import com.mobiquityinc.packer.validation.ConstraintsValidation;
+import java.text.DecimalFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Pack {
+    
+    private static final DecimalFormat decimalFormatter = new DecimalFormat("0.##");
     
     private double packageWeightLimit;
     private List<Item> itemsList;
@@ -49,9 +53,9 @@ public class Pack {
     
     @Override
     public String toString() {
-        return "Pack{" +
-            "packageWeightLimit=" + packageWeightLimit +
-            ", itemsList=" + itemsList +
-            '}';
+        return decimalFormatter.format(packageWeightLimit) + ":"
+            + itemsList.stream()
+            .map(Item::toString)
+            .collect(Collectors.joining());
     }
 }

@@ -10,8 +10,6 @@ public interface IPackScreening {
     
     List<String> readAllLines(String filePath) throws IOException;
     
-    List<Pack> convertValidatingStringLineToIntendedPack(List<String> orderStringLineList);
-    
-    Pack convertValidatingStringLineToIntendedPack(String orderStringLine);
+    List<Pack> convertValidatingStringLineToIntendedPack(List<String> packStringLineList);
     
 }

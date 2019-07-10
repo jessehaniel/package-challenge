@@ -27,14 +27,9 @@ public class PackScreening implements IPackScreening {
     }
     
     @Override
-    public List<Pack> convertValidatingStringLineToIntendedPack(List<String> orderStringLineList) {
-        return orderStringLineList.parallelStream()
-            .map(this::convertValidatingStringLineToIntendedPack)
+    public List<Pack> convertValidatingStringLineToIntendedPack(List<String> packStringLineList) {
+        return packStringLineList.parallelStream()
+            .map(Pack::new)
             .collect(Collectors.toList());
-    }
-    
-    @Override
-    public Pack convertValidatingStringLineToIntendedPack(String orderStringLine) {
-        return new Pack(orderStringLine);
     }
 }

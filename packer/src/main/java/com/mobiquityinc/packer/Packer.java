@@ -4,7 +4,6 @@ import com.mobiquityinc.packer.exception.APIException;
 import com.mobiquityinc.packer.pack.IPackScreening;
 import com.mobiquityinc.packer.pack.Pack;
 import com.mobiquityinc.packer.pack.PackScreening;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
@@ -23,16 +22,12 @@ public class Packer {
             IPackScreening packScreening = new PackScreening();
             List<Pack> packs = packScreening.convertValidating(filePath);
             return packs.parallelStream()
-                .map(Packer::solveKnapsack)
+                .map(KnapsackResolver::solve)
                 .map(Solution::toString)
                 .collect(Collectors.joining("\n"));
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             throw new APIException(e);
         }
-    }
-    
-    private static Solution solveKnapsack(Pack pack) {
-        return new Solution(Collections.emptyList());
     }
 }

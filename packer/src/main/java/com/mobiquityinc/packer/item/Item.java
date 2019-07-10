@@ -1,14 +1,21 @@
 package com.mobiquityinc.packer.item;
 
 import com.mobiquityinc.packer.validation.ConstraintsValidation;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Item {
     
     private static final int MAX_SIZE = 15;
+    private static final String EURO_SYMBOL = "€";
+    
+    private static final DecimalFormat decimalFormatter = new DecimalFormat("0.##",
+        new DecimalFormatSymbols(Locale.US));
     
     private int index;
     private double weight;
@@ -45,11 +52,16 @@ public class Item {
     private void convertValidatingStringToItem(String stringItem) {
         String[] split = stringItem.split(",");
         this.index = Integer.valueOf(split[0]);
-        this.weight = Double.valueOf(split[1]);
-        this.value = Double.valueOf(split[2].replace("€", ""));
+        this.weight = parseStringToDoubleRoudingUp(split[1]);
+        this.value = parseStringToDoubleRoudingUp(split[2].replace("€", ""));
         
         ConstraintsValidation.validateFieldLimitBetweenZeroAndOneHundred(this.weight, "Item WEIGHT limit");
         ConstraintsValidation.validateFieldLimitBetweenZeroAndOneHundred(this.weight, "Item VALUE limit");
+    }
+    
+    private Double parseStringToDoubleRoudingUp(String doubleString) {
+        String formattedInput = decimalFormatter.format(Double.valueOf(doubleString));
+        return Double.valueOf(formattedInput);
     }
     
     public int getIndex() {
@@ -97,10 +109,10 @@ public class Item {
     
     @Override
     public String toString() {
-        return "Item{" +
-            "index=" + index +
-            ", weight=" + weight +
-            ", value=" + value +
-            '}';
+        return "("
+            + index + ","
+            + decimalFormatter.format(weight) + ","
+            + EURO_SYMBOL + decimalFormatter.format(value)
+            + ")";
     }
 }
