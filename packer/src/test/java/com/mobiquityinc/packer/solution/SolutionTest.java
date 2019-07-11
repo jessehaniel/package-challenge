@@ -9,7 +9,7 @@ class SolutionTest {
     
     @Test
     void solutionToString() {
-        Solution solution = new Solution(Arrays.asList(2, 7));
-        assertEquals(solution.toString(), "2,7");
+        Solution solution = new Solution(Arrays.asList(7, 2, 5, 3));
+        assertEquals(solution.toString(), "2,3,5,7");
     }
 }

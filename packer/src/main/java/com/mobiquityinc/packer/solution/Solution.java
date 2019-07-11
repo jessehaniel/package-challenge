@@ -1,6 +1,7 @@
 package com.mobiquityinc.packer.solution;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 
 public class Solution {
@@ -21,6 +22,7 @@ public class Solution {
     
     @Override
     public String toString() {
-        return itemsIndexes.isEmpty()? "-" : StringUtils.join(itemsIndexes, ",");
+        List<Integer> sortedItems = itemsIndexes.stream().sorted().collect(Collectors.toList());
+        return itemsIndexes.isEmpty() ? "-" : StringUtils.join(sortedItems, ",");
     }
 }
