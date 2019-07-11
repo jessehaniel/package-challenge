@@ -12,8 +12,6 @@
     <modules>
         <module>packer</module>
         <module>tester</module>
-        <module>packer</module>
-        <module>tester</module>
     </modules>
 
 </project>
