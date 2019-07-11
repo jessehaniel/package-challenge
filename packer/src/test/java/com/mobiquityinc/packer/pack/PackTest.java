@@ -7,14 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.mobiquityinc.packer.item.Item;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PackTest {
-    
-    @BeforeEach
-    void setUp() {
-    }
     
     @Test
     void testNewPackFromString() {

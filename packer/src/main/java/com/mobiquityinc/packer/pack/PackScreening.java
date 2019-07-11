@@ -13,8 +13,10 @@ public class PackScreening implements IPackScreening {
     @Override
     public List<Pack> convertValidating(String filePath) throws OrderScreeningException {
         try {
-            List<String> allLines = readAllLines(filePath);
-            allLines.parallelStream().forEach(ConstraintsValidation::validateInputFormat);
+            List<String> allLines = readAllLines(filePath).parallelStream()
+                .map(line -> line.replaceAll("\\s+", ""))
+                .peek(ConstraintsValidation::validateInputFormat)
+                .collect(Collectors.toList());
             return convertValidatingStringLineToIntendedPack(allLines);
         } catch (Exception e) {
             throw new OrderScreeningException(e.getMessage(), e);

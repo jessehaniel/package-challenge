@@ -33,6 +33,6 @@ public class ConstraintsValidation {
     }
     
     private static boolean lineMatch(String line) {
-        return line.replaceAll("\\s+", "").matches(LINE_PATTERN);
+        return line.matches(LINE_PATTERN);
     }
 }
