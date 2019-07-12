@@ -33,7 +33,7 @@ class PackScreeningTest {
     
     @Test
     @Disabled
-        //need to fix the trailing zero problem
+        //need to fix the trailing zero problem when comparing strings
     void convertValidating() throws IOException, OrderScreeningException {
         String fileContent = prepareFileContent();
         String filePath = System.getProperty("java.io.tmpdir") + "testFile.txt";

@@ -13,17 +13,8 @@ public class Pack {
     private double packageWeightLimit;
     private List<Item> itemsList;
     
-    public Pack() {
-        super();
-    }
-    
-    public Pack(double packageWeightLimit, List<Item> itemsList) {
-        this.packageWeightLimit = packageWeightLimit;
-        this.itemsList = itemsList;
-    }
-    
     public Pack(String orderStringLine) {
-        this();
+        super();
         convertValidatingStringToOrder(orderStringLine);
     }
     
@@ -39,16 +30,8 @@ public class Pack {
         return packageWeightLimit;
     }
     
-    public void setPackageWeightLimit(double packageWeightLimit) {
-        this.packageWeightLimit = packageWeightLimit;
-    }
-    
     public List<Item> getItemsList() {
         return itemsList;
-    }
-    
-    public void setItemsList(List<Item> itemsList) {
-        this.itemsList = itemsList;
     }
     
     @Override

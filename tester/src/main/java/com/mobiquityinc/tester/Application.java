@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Application {
+class Application {
     
-    private static Logger logger = LogManager.getLogger(Application.class);
+    private static final Logger logger = LogManager.getLogger(Application.class);
     
     public static void main(String[] args) {
         new Application().execute();

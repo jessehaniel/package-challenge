@@ -21,10 +21,6 @@ public class Item {
     private double weight;
     private double value;
     
-    public Item() {
-        super();
-    }
-    
     public Item(int index, double weight, double value) {
         this.index = index;
         this.weight = weight;
@@ -32,7 +28,7 @@ public class Item {
     }
     
     public Item(String stringItem) {
-        this();
+        super();
         convertValidatingStringToItem(stringItem);
     }
     
@@ -52,14 +48,14 @@ public class Item {
     private void convertValidatingStringToItem(String stringItem) {
         String[] split = stringItem.split(",");
         this.index = Integer.valueOf(split[0]);
-        this.weight = parseStringToDoubleRoudingUp(split[1]);
-        this.value = parseStringToDoubleRoudingUp(split[2].replace("€", ""));
+        this.weight = parseStringToDoubleRoundingUp(split[1]);
+        this.value = parseStringToDoubleRoundingUp(split[2].replace("€", ""));
         
         ConstraintsValidation.validateFieldLimitBetweenZeroAndOneHundred(this.weight, "Item WEIGHT limit");
         ConstraintsValidation.validateFieldLimitBetweenZeroAndOneHundred(this.weight, "Item VALUE limit");
     }
     
-    private Double parseStringToDoubleRoudingUp(String doubleString) {
+    private Double parseStringToDoubleRoundingUp(String doubleString) {
         String formattedInput = decimalFormatter.format(Double.valueOf(doubleString));
         return Double.valueOf(formattedInput);
     }
@@ -68,24 +64,12 @@ public class Item {
         return index;
     }
     
-    public void setIndex(int index) {
-        this.index = index;
-    }
-    
     public double getWeight() {
         return weight;
     }
     
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-    
     public double getValue() {
         return value;
-    }
-    
-    public void setValue(double value) {
-        this.value = value;
     }
     
     @Override

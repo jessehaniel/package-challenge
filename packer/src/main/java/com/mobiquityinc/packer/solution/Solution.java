@@ -12,12 +12,8 @@ public class Solution {
         this.itemsIndexes = itemsIndexes;
     }
     
-    public List<Integer> getItemsIndexes() {
+    List<Integer> getItemsIndexes() {
         return itemsIndexes;
-    }
-    
-    public void setItemsIndexes(List<Integer> itemsIndexes) {
-        this.itemsIndexes = itemsIndexes;
     }
     
     @Override

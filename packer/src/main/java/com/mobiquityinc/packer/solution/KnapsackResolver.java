@@ -43,9 +43,6 @@ public class KnapsackResolver {
             }
         });
         return chosenItems;
-//        return eligibleItemsSortedList.stream()
-//            .filter(this::doesItFitInKnapsack)
-//            .collect(Collectors.toList());
     }
     
     Solution mapChosenItemsToSolution() {
